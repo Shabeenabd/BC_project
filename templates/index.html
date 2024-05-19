@@ -1,0 +1,149 @@
+<html> 
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" type="text/css" href="index.css"> 
+    <title>ammo</title>
+    <style>
+    
+      .result-box{
+        display: none;
+        margin-left: 20px;
+        margin-right: 20px;
+        background-color: rgb(192, 197, 201);
+        border-radius:5px;
+        padding: 10px;
+        border:5px solid black"   
+      }
+      
+      .main-box{
+        position: relative; 
+        margin: auto;
+        width: 60%;
+        padding: 20px;
+         background-color: beige;
+         margin-bottom: 20px;
+         border-radius:5px;
+         border:2px  rgb(163, 50, 50)'
+      }
+        ul{
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+      li {
+    margin-bottom: 10px;
+    word-spacing: 5px;
+  }
+  .tx{
+    font-size: larger;
+    font-weight: normal;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+ 
+    </style>
+  
+	</head>
+  
+	  <body >
+     <div style="height: 500px;align-items: center">
+
+          <div style="padding-top: 100px;"> 
+            
+            <form  class="grid" action="/result" method="POST">
+              {%if not data%}
+            <center><input class="file_submit" type="Submit" value="Get Responses" name="x" ></center>
+            {%endif%}
+            {%if  data%}
+            <center><input class="file_submit" type="Submit" value="Home" name="x" ></center>
+            {%endif%}
+            </form>
+          </div>
+          
+          <div>
+            {%if data%}
+          <div style="align-items: center;justify-content:center; height: 50px;display: flex;" >
+          <h2 style="margin-right: 600px; font-family: sans-serif">Responses</h3>
+          <form action="/result" method="post">
+            {%if prv%}
+            <input type="submit" value="Previous Page" name="x">
+            {%endif%}
+            
+            <input type="submit" value="Next Page" name="x">
+            
+          </form>
+        </div>
+        {%endif%}
+        {%if y%}
+          <div style="align-items: center;justify-content:center; height: 50px;display: flex;" >
+          <h2 style="margin-right: 700px; font-family: sans-serif">END OF PAGES</h3>
+
+            <input type="submit" value="Previous Page" name="x">
+          <form action="/result" method="post"><input type="submit" value="Home" name="x">
+          </form>
+        </div>
+        {%endif%}
+        {%if data%}
+          {%for i in data%}
+        
+          <div  class='main-box'>
+          
+            <p class="tx"  ;>{{i['response']}}</p>>
+          
+            <button onclick="btnclk(this)" style="position:absolute;right:  50px;bottom: 20px;";>view source</button>
+            <div style="display: none" class='result-box' >
+            {%if i['source']==[]%}
+            
+            <p>links unavailable<p>
+            {%else%}
+            <ul>
+
+              {%for j in i['source']%}
+              <li style="padding-left:1em"><b>id</b> : {{j['id']}}  <b>link</b> : <a href="{{j['link']}}">{{j['link']}}</a></li>
+              {%endfor%}
+            
+            </ul>
+            {%endif%}
+          </div>
+        </div>
+        {%endfor%}
+       
+        <div style="align-items: center;justify-content:center; height: 200px;display: flex;">
+          <form action="/result" method="post">
+            <input type="submit" value="Next Page" name="x">
+          </form>
+        </div>
+        {%endif%}
+      </div> 
+      
+      
+        
+       
+
+       
+      
+      
+      </div>
+        
+
+    </div>
+      <script>
+        function btnclk(x){
+          y=x.nextElementSibling
+        console.log(y)
+        if(y.style.display=='none'){
+        y.style.display='block'
+        }else{
+          y.style.display='none'
+        }
+
+};
+
+</script>
+        
+       
+
+    </body>
+
+</html>
