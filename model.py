@@ -92,6 +92,6 @@ def prev_page():
 
 #conclusion
 #can get the response-source object by simply calling the get_response() function
-#To view through web page , developed flask app:
+#To view through web page , run  the flask application given:
                             # 1)app.py
                             # 2) index.html
